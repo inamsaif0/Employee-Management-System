@@ -23,7 +23,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    # Employee mutations
+    
     addEmployee(name: String!, age: Int!, class: String!, subjects: [String!]!, attendance: [String!]!): Employee
     updateEmployee(
       id: ID!,
@@ -34,7 +34,7 @@ const typeDefs = gql`
       attendance: [String!]
     ): Employee
 
-    # Authentication mutations
+
     register(username: String!, email: String!, password: String!, role: String!): User!
     login(email: String!, password: String!): AuthResponse!
   }

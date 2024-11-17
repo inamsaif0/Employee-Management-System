@@ -7,7 +7,6 @@ import typeDefs from './graphql/Schemas/schema';
 import resolvers from './graphql/Resolvers/resolver';
 import dotenv from 'dotenv';
 import { authenticateToken } from './middlewares/auth-middleware';
-import jwt from 'jsonwebtoken';
 
 dotenv.config();
 
@@ -15,10 +14,8 @@ const app = express();
 export const envMode = process.env.NODE_ENV?.trim() || 'DEVELOPMENT';
 export const JWT_SECRET = process.env.JWT_SECRET
 
-// Connect to MongoDB
 connectDB();
 
-// Middleware for Authentication
 app.use(authenticateToken);
 
 const server = new ApolloServer({
@@ -33,7 +30,7 @@ app.use(
   bodyParser.json(),
   expressMiddleware(server, {
     context: async ({ req }: { req: any }) => {
-      const user = req.user; // Attach user from the middleware
+      const user = req.user;
       return { user };
     },
   })

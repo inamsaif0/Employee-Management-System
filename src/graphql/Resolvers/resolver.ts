@@ -4,7 +4,7 @@ import { registerUser, loginUser } from '../../controllers/User';
 
 const resolvers = {
   Query: {
-    // List all employees
+
     listEmployees: async (_: unknown, args: any, { user }: { user: any }) => {
       if (!user) {
         throw new Error('Authentication required');
@@ -12,7 +12,6 @@ const resolvers = {
       return await getEmployees(args);
     },
 
-    // Get employee by ID
     getEmployee: async (_: unknown, { id }: { id: string }, { user }: { user: any }) => {
       if (!user) {
         throw new Error('Authentication required');
@@ -22,6 +21,7 @@ const resolvers = {
   },
 
   Mutation: {
+
     register: async (
       _: unknown,
       { username, email, password, role }: { username: string; email: string; password: string; role: string }
@@ -33,7 +33,6 @@ const resolvers = {
       const newUser = await registerUser(username, email, password, role);
       console.log("this is new User from Resolver Mutation>>>>>>", newUser);
   
-      // Return the user data as expected by the schema
       return {
           id: newUser.id,
           username: newUser.username,
